@@ -1,14 +1,14 @@
 # startkit api-server 模板 eggjs-v3
 
 ## 计划
-- [ ] typescript
-- [ ] prisma db
+- [ ] ~~typescript~~
+- [ ] ~~prisma db~~
 - [ ] .env
-- [ ] jwt
-- [ ] cors
-- [ ] default api  :3000/api/system
+- [x] jwt
+- [x] cors
+- [x] default api  :3000/api/system
 - [ ] Dockerfile
-- [ ] node > 18
+- [ ] node > 16
 
 
 ## 开发
