@@ -1,4 +1,4 @@
-# startkit api-server 模板
+# startkit api-server 模板 eggjs-v3
 
 ## 计划
 - [ ] typescript
