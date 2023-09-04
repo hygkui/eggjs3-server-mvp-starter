@@ -5,7 +5,13 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/api/info', controller.home.index);
+  router.get('/api/system', controller.home.system);
+  router.post('/api/upload', controller.file.upload); // 上传文件
+   // 地址级联查询
+   router.get('/api/provinces', controller.home.getProvince); // 获取省份
+   router.get('/api/cities', controller.home.getCity); // 获取城市
+   router.get('/api/counties', controller.home.getCounty); // 获取区县
+
   router.resources('scene', '/api/scenes', controller.scene);
 
   router.post('/api/user/rigist', controller.user.rigist); // 用户注册
