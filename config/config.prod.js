@@ -7,4 +7,5 @@ exports.sequelize = {
   password: process.env.DB_PASSWD, // 数据库密码
   port: process.env.DB_PORT, // 数据库端口
   database: process.env.DB_DATABASE, // 数据库的名称
+  logging: false, // 是否打印日志
 };
