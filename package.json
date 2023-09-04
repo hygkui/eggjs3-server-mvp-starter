@@ -37,7 +37,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon --title=mvp-server --port=7058",
     "stop": "egg-scripts stop --title=mvp-server",
-    "dev": "egg-bin dev --port=17058",
+    "dev": "egg-bin dev --port=7058",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

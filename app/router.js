@@ -6,7 +6,6 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/api/info', controller.home.index);
-  router.resources('blog', '/api/blogs', controller.blog);
   router.resources('scene', '/api/scenes', controller.scene);
 
   router.post('/api/user/rigist', controller.user.rigist); // 用户注册

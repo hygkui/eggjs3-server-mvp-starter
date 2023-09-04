@@ -17,8 +17,8 @@ class AppBootHook {
       if (env === 'unittest') { // 单元测试环境
         await app.model.sync({ force: true });
       } else if ([ 'local', 'dev' ].includes(env)) { // 本地开发环境
-        await app.model.sync({ force: true }); // 会删除表，慎用
-        // await app.model.sync({ alter: true }); // 会修改表，慎用
+        // await app.model.sync({ force: true }); // 会删除表，慎用
+        await app.model.sync({ alter: true }); // 会修改表，慎用
       }
     });
   }
