@@ -1,7 +1,9 @@
 'use strict';
+
 const _ = require('lodash');
 require('dotenv').config()
 
+const { getEnv } = require('../app/extend/utils');
 const imgExt = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.psd', '.svg', '.tiff'];
 const docExt = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.pdf', '.txt', '.md', '.csv'];
 const videoExt = ['.mp4', '.avi', '.mov', '.rmvb', '.rm', '.flv', '.mkv', '.3gp', '.wmv', '.mpeg', '.mpg', '.dat', '.ts', '.mts', '.vob'];
@@ -12,11 +14,11 @@ module.exports = appInfo => {
 
   const mysql_db = {
     dialect: 'mysql',
-    host: '192.168.137.130',
-    port: 13306,
-    username: 'root',
-    password: '123456',
-    database: 'mvp-demo',
+    host: getEnv('DB_HOST'),
+    port: getEnv('DB_PORT', 'int'),
+    username: getEnv('DB_USER'),
+    password: getEnv('DB_PASSWD'),
+    database: getEnv('DB_DATABASE'),
     pool: {
       max: 5,
       min: 0,
@@ -24,7 +26,44 @@ module.exports = appInfo => {
       idle: 10000,
     },
   }
-  config.sequelize = process.env.db === 'mysql' ? mysql_db : sqlite_db;
+
+  const sqlite_db = {
+    dialect: 'sqlite',
+    storage: 'db.sqlite',
+    logging: false,
+  }
+
+  const pg_db = {
+    dialect: 'postgres',
+    host: getEnv('DB_HOST'),
+    port: getEnv('DB_PORT', 'int'),
+    username: getEnv('DB_USER'),
+    password: getEnv('DB_PASSWD'),
+    database: getEnv('DB_DATABASE'),
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
+  }
+
+  switch(process.env.db) {
+    case 'mysql':
+      config.sequelize = mysql_db;
+      break;
+    case 'sqlite':
+      config.sequelize = sqlite_db;
+      break;
+    case 'postgresql':
+      config.sequelize = pg_db;
+      break;
+    default:
+      config.sequelize = sqlite_db;
+  }
+
+
+  console.log('config.sequelize :>> ', config.sequelize);
   
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_{{keys}}';

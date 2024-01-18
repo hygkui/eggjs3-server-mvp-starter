@@ -1,3 +1,4 @@
+
 module.exports = app => {
   console.log('🚀 ~ file: app.js ~ line 3 ~ app.config', app.config.env);
   if (app.config.env === 'local' || app.config.env === 'dev') {
@@ -7,6 +8,7 @@ module.exports = app => {
   }
 };
 
+const { getEnv } = require('./app/extend/utils');
 // 周期函数读取
 class AppBootHook {
   constructor(app) {
@@ -18,7 +20,7 @@ class AppBootHook {
         await app.model.sync({ force: true });
       } else if ([ 'local', 'dev' ].includes(env)) { // 本地开发环境
         // await app.model.sync({ force: true }); // 会删除表，慎用
-        await app.model.sync({ alter: true }); // 会修改表，慎用
+        await app.model.sync({ alter: getEnv("DB_SYNC_ALTER", 'bool') }); // 会修改表，慎用
       }
     });
   }

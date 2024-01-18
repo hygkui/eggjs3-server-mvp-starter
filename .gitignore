@@ -7,3 +7,5 @@ run/
 demo.sqlite
 
 .env*
+
+db.sqlite
