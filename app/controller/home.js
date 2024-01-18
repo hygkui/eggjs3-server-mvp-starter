@@ -1,12 +1,12 @@
 'use strict';
 const { Controller } = require('egg');
-
+const { getEnv } = require('../extend/utils')
 class HomeController extends Controller {
   async system() {
     const { ctx } = this;
     ctx.body = {
-      name: 'mvp-server',
-      version: '0.2',
+      name: getEnv('APP_NAME') || 'mvp-server',
+      version: getEnv('APP_VERSION') || '0.2',
       buildAt: '2021-08-19 14:11:01.378'
     }
   }

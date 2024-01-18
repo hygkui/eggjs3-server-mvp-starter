@@ -6,6 +6,7 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/api/system', controller.home.system);
+  router.get('/', controller.home.system);
   router.post('/api/upload', controller.file.upload); // 上传文件
    // 地址级联查询
    router.get('/api/provinces', controller.home.getProvince); // 获取省份

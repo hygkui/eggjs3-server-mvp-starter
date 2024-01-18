@@ -16,6 +16,33 @@ function getTokenInfo(jwt, auth, secret) {
   return;
 }
 
+function toBoolean(str) {
+  if (!str || typeof str !== 'string') {
+    return false
+  } else if (str === '1' || str === 'true' || str === 'TRUE') {
+    return true
+  }
+}
+
+function toInt(str) {
+  if (!str || typeof str !== 'string') {
+    return -1
+  } else {
+    return parseInt(str)
+  }
+}
+
+function getEnv(propKey, type='string') {
+  if (type === 'bool') {
+    return toBoolean(process.env[propKey])
+  } else if (type === 'int') {
+    return toInt(process.env[propKey])
+  }
+  return process.env[propKey]
+}
+
+
 module.exports = {
   getTokenInfo,
+  getEnv,
 };
